@@ -3,14 +3,14 @@ from typing import Dict
 
 str_float_dict = Dict[str, float]
 
-def errors(true_value: float, approx_value: float) -> str_float_dict:
+def errors(true_value: float, approx_value: float, round_: int) -> str_float_dict:
     '''
     Calculate abs error, rel error and percn error upto 4 significant digits 
     '''
     
-    absolute_error: float = round(abs(true_value - approx_value), 4)
-    relative_error: float = round(absolute_error / true_value, 4)
-    percentage_error: str = relative_error * 100
+    absolute_error: float = round(abs(true_value - approx_value), round_)
+    relative_error: float = round(absolute_error / true_value, round_)
+    percentage_error: str = round(relative_error * 100, round_)
     
     result: str_float_dict =  {
         "absolute_error": absolute_error,
@@ -21,11 +21,11 @@ def errors(true_value: float, approx_value: float) -> str_float_dict:
     return result
 
 
-true_value: float = 36.7458645
-approx_value: float = 36.0
+true_value: float = float(input("True value: "))
+approx_value: float = float(input("Appx. value: "))
+round_ : int = int(input("Round: "))
 
-calc_errors: str_float_dict = errors(true_value, approx_value)
+calc_errors: str_float_dict = errors(true_value, approx_value, round_)
 
 
 [print(f"{key} = {value}") for key, value in calc_errors.items()]
-    
