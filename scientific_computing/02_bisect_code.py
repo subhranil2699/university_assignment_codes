@@ -37,7 +37,7 @@ def bisection(func: Callable[[float], float],
           return {"root": root, "table": s}
         
         # return root only
-        return s
+        return root
 
 
 if __name__ == "__main__":
