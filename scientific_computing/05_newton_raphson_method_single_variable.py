@@ -1,6 +1,5 @@
 """
 Newton Raphson Method in Python
-30th May, 2022
 """
 from typing import Any
 from sympy import Symbol, diff, lambdify, sympify
@@ -29,9 +28,8 @@ def newton_raphson(func: str, appx_root: float, err: float = 0.01, max_iter: int
 
     f, f_prime = derivative(func)
     root = None
-    i = 0
     print("\nn\t|x_n\t\t|f(x_n)\t\t|x_(n+1)\t|h\t\t\t|")
-    while i <= max_iter:
+    for i in range(max_iter + 1):
         # Newton Raphson method to calculate the root
         new_root = appx_root - (h := f(appx_root) / f_prime(appx_root))
 
@@ -42,7 +40,6 @@ def newton_raphson(func: str, appx_root: float, err: float = 0.01, max_iter: int
         else:
             print(f"{i}\t|{appx_root:0.5f}\t|{f(appx_root):0.5f}\t|{new_root:0.5f}\t|{h:0.5f}\t|")
             appx_root = new_root  # previous root becomes the new root
-            i += 1
 
     # returns root if it has been found in the max error range / returns None
     return root if root else "\nInsufficient Iteration!!!"
@@ -50,5 +47,5 @@ def newton_raphson(func: str, appx_root: float, err: float = 0.01, max_iter: int
 
 if __name__ == '__main__':
     func: str = "x**3 - 2*x - 5"
-    result: Any = newton_raphson(func, 2.0, 0.00001, 5)
+    result: Any = newton_raphson(func, 2.0, 0.00001, 3)
     print(result)
